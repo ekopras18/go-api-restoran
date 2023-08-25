@@ -39,6 +39,7 @@ var (
 	}
 )
 
+// Ingredient
 func TestCreateIngredient(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -50,7 +51,7 @@ func TestCreateIngredient(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
-func TestGetIngredients(t *testing.T) {
+func TestGetIngredient(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
 	requestBody, _ := json.Marshal(mockIngredient)
@@ -58,6 +59,17 @@ func TestGetIngredients(t *testing.T) {
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
 	app.Get("/api/get_ingredients", repo.GetIngredient)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+func TestGetIngredientById(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockIngredient)
+	req := httptest.NewRequest(http.MethodGet, "/api/get_ingredient/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Get("/api/get_ingredient/:id", repo.GetIngredientById)
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
@@ -72,6 +84,18 @@ func TestUpdateIngredient(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestDeleteIngredient(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockIngredient)
+	req := httptest.NewRequest(http.MethodDelete, "/api/delete_ingredient/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Delete("/api/delete_ingredient/:id", repo.DeleteIngredient)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+// Category
 func TestCreateCategory(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -94,6 +118,17 @@ func TestGetCategory(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestGetCategoryById(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockCategory)
+	req := httptest.NewRequest(http.MethodGet, "/api/get_category/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Get("/api/get_category/:id", repo.GetCategoryById)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
 func TestUpdateCategory(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -105,6 +140,18 @@ func TestUpdateCategory(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestDeleteCategory(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockCategory)
+	req := httptest.NewRequest(http.MethodDelete, "/api/delete_category/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Delete("/api/delete_category/:id", repo.DeleteCategory)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+// Recipe
 func TestCreateRecipe(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -127,6 +174,17 @@ func TestGetRecipe(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestGetRecipeById(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockRecipe)
+	req := httptest.NewRequest(http.MethodGet, "/api/get_recipe/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Get("/api/get_recipe/:id", repo.GetRecipeById)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
 func TestUpdateRecipe(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -138,6 +196,18 @@ func TestUpdateRecipe(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestDeleteRecipe(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockRecipe)
+	req := httptest.NewRequest(http.MethodDelete, "/api/delete_recipe/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Delete("/api/delete_recipe/:id", repo.DeleteRecipe)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+// RecipeIngredient
 func TestCreateRecipeingredient(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -160,6 +230,17 @@ func TestGetRecipeingredient(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
+func TestGetRecipeingredientById(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockRecipeIngredient)
+	req := httptest.NewRequest(http.MethodGet, "/api/get_recipeingredient/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Get("/api/get_recipeingredient/:id", repo.GetRecipeingredientById)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
 func TestUpdateRecipeingredient(t *testing.T) {
 	app := fiber.New()
 	repo := &Repository{DB: nil}
@@ -168,6 +249,17 @@ func TestUpdateRecipeingredient(t *testing.T) {
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
 	app.Put("/api/update_recipeingredient/:id", repo.UpdateRecipeingredient)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+func TestDeleteRecipeingredient(t *testing.T) {
+	app := fiber.New()
+	repo := &Repository{DB: nil}
+	requestBody, _ := json.Marshal(mockRecipeIngredient)
+	req := httptest.NewRequest(http.MethodDelete, "/api/delete_recipeingredient/1", bytes.NewBuffer(requestBody))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+	app.Delete("/api/delete_recipeingredient/:id", repo.DeleteRecipeingredient)
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
