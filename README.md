@@ -9,11 +9,11 @@ Aplikasi ini dibuat menggunakan bahasa pemrograman Golang dan database PostgreSQ
 - Jalankan perintah `go mod tidy` untuk mendownload library yang dibutuhkan
 - Docker
   - masuk ke direktori aplikasi
-  - jangan lupa create network `docker network create mre` (menyesuaikan nama network)
+  - jangan lupa create network `docker network create tlab` (menyesuaikan nama network)
   - jalankan perintah `docker-compose build`
   - kemudian jalankan perintah `docker-compose up -d`
   - app diexpose ke port `:8080`
-  - database diexpose ke port `:5433`
+  - database diexpose ke port `:5432`
 - Manual
   - masuk ke direktori aplikasi
   - jalankan perintah `go run .`

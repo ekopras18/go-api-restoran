@@ -8,9 +8,9 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
-      - mre 
+      - tlab 
   app:
     build:
       context: .  
@@ -21,7 +21,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - mre  
+      - tlab  
 networks:
-  mre:
+  tlab:
     external: true  
